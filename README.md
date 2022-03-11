@@ -1,24 +1,3 @@
-# vue-fetch
+# Random cat facts generator
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+The website lets you generate random cat facts using https://cat-fact.herokuapp.com/#/api. The website is build in Vue3
