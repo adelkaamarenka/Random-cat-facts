@@ -1,38 +1,34 @@
 <template>
   <h1>{{ displayedFact }}</h1>
-  <button @click="incrementId()">New fact</button>
+  <button @click="getRandomFact()">New fact</button>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      id: 0,
+      displayedFact: "",
       facts: [],
-      factsText: [],
     };
   },
   methods: {
     async fetchFacts() {
       const res = await fetch("https://cat-fact.herokuapp.com/facts");
-      this.facts = await res.json();
-      this.factsText = this.facts.map((fact) => fact.text);
+      const resJSON = await res.json();
+      this.facts = resJSON.map((fact) => fact.text);
     },
-    incrementId() {
-      if (this.id < this.factsText.length - 1) {
-        this.id++;
-      } else {
-        this.id = 0;
-      }
+    async getRandomFact() {
+      this.displayedFact = await this.facts[
+        Math.floor(Math.random() * this.facts.length)
+      ];
+    },
+    async onMount() {
+      await this.fetchFacts();
+      await this.getRandomFact();
     },
   },
-  mounted() {
-    this.fetchFacts();
-  },
-  computed: {
-    displayedFact() {
-      return this.factsText[this.id];
-    },
+  async mounted() {
+    await this.onMount();
   },
 };
 </script>
