@@ -1,6 +1,10 @@
 <template>
-  <h1>{{ displayedFact }}</h1>
-  <button @click="getRandomFact()">New fact</button>
+  <div class="wrapper">
+    <h1 class="fact">{{ displayedFact }}</h1>
+    <button class="btn btn-dark btn-lg" @click="getRandomFact()">
+      New fact
+    </button>
+  </div>
 </template>
 
 <script>
@@ -39,4 +43,26 @@ export default {
 };
 </script>
 
+<style>
+#app {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: url("./assets/pattern.png");
+  display: flex;
+}
 
+.wrapper {
+  height: 75vh;
+  width: 60vw;
+  margin: auto;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.fact {
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  font-size: 55px;
+  height: 30%;
+}
+</style>
