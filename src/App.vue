@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <h1 class="fact">{{ displayedFact }}</h1>
-    <button class="btn btn-dark btn-lg" @click="getRandomFact()">
+    <button class="btn btn-dark btn-lg" @click="getRandomNumber()">
       New fact
     </button>
   </div>
@@ -11,10 +11,14 @@
 export default {
   data() {
     return {
-      displayedFact: "",
       facts: [],
       ranNumber: 0,
     };
+  },
+  computed: {
+    displayedFact() {
+      return this.facts[this.ranNumber];
+    },
   },
   methods: {
     async fetchFacts() {
@@ -22,19 +26,17 @@ export default {
       const resJSON = await res.json();
       this.facts = resJSON.map((fact) => fact.text);
     },
-    async getRandomFact() {
+    getRandomNumber() {
       let newRandom;
       do {
         newRandom = Math.floor(Math.random() * this.facts.length);
       } while (newRandom == this.ranNumber);
 
       this.ranNumber = newRandom;
-
-      this.displayedFact = await this.facts[this.ranNumber];
     },
     async onMount() {
       await this.fetchFacts();
-      await this.getRandomFact();
+      this.getRandomNumber();
     },
   },
   async mounted() {
