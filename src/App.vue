@@ -9,6 +9,7 @@ export default {
     return {
       displayedFact: "",
       facts: [],
+      ranNumber: 0,
     };
   },
   methods: {
@@ -18,9 +19,14 @@ export default {
       this.facts = resJSON.map((fact) => fact.text);
     },
     async getRandomFact() {
-      this.displayedFact = await this.facts[
-        Math.floor(Math.random() * this.facts.length)
-      ];
+      let newRandom;
+      do {
+        newRandom = Math.floor(Math.random() * this.facts.length);
+      } while (newRandom == this.ranNumber);
+
+      this.ranNumber = newRandom;
+
+      this.displayedFact = await this.facts[this.ranNumber];
     },
     async onMount() {
       await this.fetchFacts();
@@ -32,3 +38,5 @@ export default {
   },
 };
 </script>
+
+
